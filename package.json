@@ -1,0 +1,37 @@
+{
+  "name": "steemcord-presences",
+  "author": "Snazzah",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "lint": "yarn run eslint .",
+    "lint:fix": "yarn run eslint . --fix",
+    "pv": "node ./util/validator.js",
+    "pv:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./util/validator.ts",
+    "cm": "node ./util/combineMetadata.js",
+    "cm:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./util/combineMetadata.ts"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/lodash": "^4.14.164",
+    "@types/node": "^14.14.6",
+    "@types/node-fetch": "^2.5.7",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "chalk": "^4.1.0",
+    "eslint": "^7.12.1",
+    "execa": "^4.1.0",
+    "filels": "^1.1.0",
+    "glob": "^7.1.6",
+    "joi": "^17.3.0",
+    "joi-extension-semver": "^5.0.0",
+    "jsonschema": "^1.4.0",
+    "lodash": "^4.17.20",
+    "node-fetch": "^2.6.1",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "semver": "^7.3.2",
+    "typescript": "^4.0.5",
+    "vm2": "^3.9.2"
+  }
+}
