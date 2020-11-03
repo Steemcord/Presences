@@ -16,4 +16,5 @@ package-lock.json
 **/.vscode/*
 **/.history
 
+multi_metadata_result.json
 schema.json
