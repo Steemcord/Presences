@@ -16,8 +16,4 @@ package-lock.json
 **/.vscode/*
 **/.history
 
-# Exception for extension recommendations
-!**/.vscode/extensions.json
-
-multi_metadata.json
 schema.json
