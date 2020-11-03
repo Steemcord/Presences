@@ -1,0 +1,42 @@
+name: Update Multi Metadata
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "**/metadata.json"
+jobs:
+  validate:
+    name: Update Multi Metadata
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'Steemcord'
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Restore CI Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
+      - name: Prep CM
+        run: |
+          yarn
+          yarn cm:compile
+      - name: Start CM
+        run: yarn cm --colors
+      - name: Checkout Metadata Branch
+        run: git checkout metadata
+      - name: Overwrite Metadatas
+        run: cp multi_metadata_result.json multi_metadata.json
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          branch: metadata
+          add: multi_metadata.json
+          message: "🤖 Update metadata [${{ github.sha }}]"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
