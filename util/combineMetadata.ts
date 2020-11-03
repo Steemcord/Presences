@@ -12,5 +12,5 @@ const loadMetadata = (path: string): unknown =>
 
 console.log(blue(`Combining metadata... (${metaFiles.length})`));
 const multiMetadata = metaFiles.map(mf => loadMetadata(mf));
-fs.writeFileSync('./multi_metadata.json', JSON.stringify(multiMetadata));
-console.log(green(`✔ Wrote ${metaFiles.length} files into multi_metadata.json`));
+fs.writeFileSync('./multi_metadata_result.json', JSON.stringify(multiMetadata));
+console.log(green(`✔ Wrote ${metaFiles.length} files into multi_metadata_result.json`));

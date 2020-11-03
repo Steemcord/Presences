@@ -20,4 +20,5 @@ package-lock.json
 !**/.vscode/extensions.json
 
 multi_metadata.json
+multi_metadata_result.json
 schema.json
