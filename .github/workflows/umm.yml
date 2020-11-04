@@ -33,7 +33,7 @@ jobs:
       - name: Overwrite Metadatas
         run: cp multi_metadata_result.json multi_metadata.json
       - name: Commit changes
-        uses: EndBug/add-and-commit@v4
+        uses: EndBug/add-and-commit@v5
         with:
           branch: metadata
           add: multi_metadata.json
