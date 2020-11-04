@@ -2,9 +2,41 @@ pull_request_rules:
   - name: Automatic merge when required reviews are approved
     conditions:
       - base=master
-      - "#approved-reviews-by>=2"
+      - "#approved-reviews-by>=1"
+      - approved-reviews-by=@Steemcord/reviewers
       - status-success=Presence Validation Check
       - status-success=ESLint
     actions:
       merge:
         method: merge
+  - name: Remove stale reviews
+    conditions:
+      - base=master
+    actions:
+      dismiss_reviews: {}
+  - name: Close PRs to metadata branch
+    conditions:
+      - base=metadata
+    actions:
+      close:
+        message: |
+          The `metadata` branch is not meant to accept pull requests.
+  - name: Merge non-breaking dependencies automatically
+    conditions:
+      - author~=^dependabot(|-preview)\[bot\]$
+      - title~=from (?P<major>\d+).\d+.\d+ to (?P=major).\d+.\d+
+      - base=master
+    actions:
+      merge:
+        method: merge
+  - name: Notify breaking dependencies automatically
+    conditions:
+      - author~=^dependabot(|-preview)\[bot\]$
+      - title~=from (?P<major>\d+).\d+.\d+ to (?!(?P=major).\d+.\d+)
+    actions:
+      comment:
+        message: |
+          This PR features a major change and requires further approval.
+      request_reviews:
+        users:
+          - Snazzah
