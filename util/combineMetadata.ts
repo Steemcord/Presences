@@ -17,8 +17,8 @@ const multiMetadata = metaFiles.map(mf => {
   const relativeDir = posix.relative(posix.join(__dirname, '..'), posix.join(mf, '..'));
   return {
     ...metadata,
-    script_url: `https://raw.githack.com/Steemcord/Presences/master/${relativeDir}/index.ts`,
-    update_url: `https://raw.githack.com/Steemcord/Presences/master/${relativeDir}/metadata.json`
+    script_url: encodeURI(`https://raw.githack.com/Steemcord/Presences/master/${relativeDir}/index.ts`),
+    update_url: encodeURI(`https://raw.githack.com/Steemcord/Presences/master/${relativeDir}/metadata.json`)
   };
 });
 fs.writeFileSync('./multi_metadata_result.json', JSON.stringify(multiMetadata));

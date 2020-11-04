@@ -11,7 +11,7 @@ interface PresenceData {
   partySize?: number;
 }
 
-interface RichPresenceData {
+interface SteamPresenceData {
   presenceArray: Array<{ key: string; value: string; }>;
   presence: { [key: string]: string };
   presenceString?: string;
@@ -54,7 +54,7 @@ declare class Presence {
    * @param eventName EventName to subscribe to
    * @param callback Callback function for event
    */
-  on(eventName: 'richPresenceUpdate', callback: (data: RichPresenceData) => void): void;
+  on(eventName: 'richPresenceUpdate', callback: (data: SteamPresenceData) => void): void;
 }
 
 /**
