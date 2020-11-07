@@ -29,16 +29,11 @@ jobs:
           yarn cm:compile
       - name: Start CM
         run: yarn cm --colors
-      - name: Checkout Metadata Branch
-        uses: actions/checkout@v2
-        with:
-          ref: metadata
-      - name: Overwrite Metadatas
-        run: cp multi_metadata_result.json multi_metadata.json
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
         with:
-          branch: metadata
+          author_name: github-actions
+          author_email: github-actions@github.com
           add: multi_metadata.json
           message: "🤖 Update metadata [${{ github.sha }}]"
         env:

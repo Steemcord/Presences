@@ -23,5 +23,5 @@ const multiMetadata = metaFiles.map(mf => {
     update_url: encodeURI(`https://raw.githack.com/Steemcord/Presences/master/${relativeDir}/metadata.json`)
   };
 });
-fs.writeFileSync('./multi_metadata_result.json', JSON.stringify(multiMetadata));
-console.log(green(`✔ Wrote ${metaFiles.length} files into multi_metadata_result.json`));
+fs.writeFileSync('./multi_metadata.json', JSON.stringify(multiMetadata));
+console.log(green(`✔ Wrote ${metaFiles.length} files into multi_metadata.json`));
