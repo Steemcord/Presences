@@ -8,13 +8,15 @@ const metaFiles = glob('./presences/*/*/metadata.json', {
   absolute: true
 });
 
-const loadMetadata = (path: string): { script_url?: string; update_url?: string; } =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const loadMetadata = (path: string): any =>
     JSON.parse(fs.readFileSync(path, 'utf-8'));
 
 console.log(blue(`Combining metadata... (${metaFiles.length})`));
 const multiMetadata = metaFiles.map(mf => {
   const metadata = loadMetadata(mf);
   const relativeDir = posix.relative(posix.join(__dirname, '..'), posix.join(mf, '..'));
+  if(metadata.$schema) delete metadata.$schema;
   return {
     ...metadata,
     script_url: encodeURI(`https://raw.githack.com/Steemcord/Presences/master/${relativeDir}/index.ts`),

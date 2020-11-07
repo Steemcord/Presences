@@ -4,13 +4,16 @@ import { green, yellow, red, blue } from 'chalk';
 import { transpileModule } from 'typescript';
 import fetch from 'node-fetch';
 import { NodeVM } from 'vm2';
-import { uniq } from 'lodash';
+import { uniq, uniqBy, findIndex, findLastIndex } from 'lodash';
 import { sync as glob } from 'glob';
 
 // Create a mock Presence to validate criteria
 class MockPresence {
   clientIDCheck = false;
   eventCountCheck = false;
+  setActivityOffEmitter = false;
+  gettingDataOffEmitter = false;
+  usingReady = false;
 
   constructor(opts: { clientID: string; module: NodeModule; }) {
     if (opts.clientID)
@@ -19,12 +22,29 @@ class MockPresence {
       opts.module.exports = this;
   }
 
-  on() {
-    this.eventCountCheck = true;
+  on(eventName: string) {
+    if (eventName === 'richPresenceUpdate') this.eventCountCheck = true;
+    if (eventName === 'ready') this.usingReady = true;
+  }
+
+  setActivity() {
+    if (!this.eventCountCheck) this.setActivityOffEmitter = true;
+  }
+
+  clearActivity() {
+    if (!this.eventCountCheck) this.setActivityOffEmitter = true;
+  }
+
+  getSetting() {
+    if (!this.usingReady) this.setActivityOffEmitter = true;
+  }
+
+  getMetadata() {
+    if (!this.usingReady) this.gettingDataOffEmitter = true;
   }
 }
 
-const METADATA_SCHEMA = 'https://snazzah.com/steemcord-schema/1.json';
+const METADATA_SCHEMA = 'https://snazzah.com/steemcord-schema/2.3.json';
 const metaFiles = fs.existsSync('./file_changes.txt')
   ? uniq(fs.readFileSync('./file_changes.txt', 'utf-8')
     .trim().split('\n')
@@ -40,9 +60,9 @@ const metaFiles = fs.existsSync('./file_changes.txt')
   });
 const vm = new NodeVM({
     console: 'inherit',
-    sandbox: { Presence: MockPresence },
+    sandbox: { Presence: MockPresence, fetch: null },
     require: {
-      external: false
+      external: ['lodash']
     }
   });
 
@@ -85,6 +105,17 @@ const good = (meta: MinimalMetadata): void => {
         errors.push(`Metadata: ${error.message} @ ${error.property}`);
     } else if (meta.$schema && meta.$schema !== METADATA_SCHEMA)
       warnings.push('Schema out of date');
+    
+    // Check for non-unique setting IDs
+    if (result.valid && uniqBy(meta.settings, 'key').length !== meta.settings.length) {
+      const justKeys = meta.settings.map(setting => ({ key: setting.key }));
+      const duplicates = uniqBy(
+        meta.settings
+          .filter(setting =>
+            findIndex(justKeys, { key: setting.key }) !== findLastIndex(justKeys, { key: setting.key })),
+          'key');
+      errors.push(`Metadata: ${duplicates.length} duplicate setting ID(s) [${duplicates.map(d => d.key).join(', ')}]`);
+    }
   
     // Check module
     const moduleFile = metaFile.replace('/metadata.json', '/index.ts');
@@ -98,6 +129,10 @@ const good = (meta: MinimalMetadata): void => {
           errors.push('Module: Presence has no Client ID.');
         if (!presence.eventCountCheck)
           errors.push('Module: Presence has no listeners.');
+        if (presence.setActivityOffEmitter)
+          errors.push('Module: Presence is setting/clearing activity outside of \'richPresenceUpdate\' event.');
+        if (presence.gettingDataOffEmitter)
+          errors.push('Module: Presence is getting metadata/settings outside of \'ready\' event.');
       }
     } else errors.push('Module: File index.ts does not exist.');
 
@@ -131,4 +166,5 @@ interface MinimalMetadata {
   version: string;
   name: string;
   $schema: string;
+  settings?: Array<{ key: string; }>
 }
