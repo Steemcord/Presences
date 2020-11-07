@@ -5,10 +5,12 @@ on:
       - master
     paths:
       - "**/metadata.json"
+      - "presences/**/index.ts"
   pull_request:
     branches:
       - master
     paths:
+      - "presences/**/index.ts"
       - "**/metadata.json"
 jobs:
   validate:
