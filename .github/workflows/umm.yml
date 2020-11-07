@@ -30,7 +30,9 @@ jobs:
       - name: Start CM
         run: yarn cm --colors
       - name: Checkout Metadata Branch
-        run: git checkout origin metadata
+        uses: actions/checkout@v2
+        with:
+          ref: metadata
       - name: Overwrite Metadatas
         run: cp multi_metadata_result.json multi_metadata.json
       - name: Commit changes
