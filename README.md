@@ -1,4 +1,5 @@
 <div align="center">
+<img src="https://get.snaz.in/3GB6iJT.png" width="256">
 
 # Steemcord Presences
 
