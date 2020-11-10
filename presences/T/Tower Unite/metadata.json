@@ -8,5 +8,18 @@
     "name": "Snazzah",
     "github": "Snazzah"
   },
-  "version": "1.0.0"
+  "settings": [{
+    "key": "showservername",
+    "type": "checkbox",
+    "title": "Plaza: Show Server Name",
+    "note": "i.e. US WEST2",
+    "default": true
+  }, {
+    "key": "showgolfhole",
+    "type": "checkbox",
+    "title": "Minigolf: Show Minigolf Hole",
+    "note": "i.e. 'Hole 12: Carnival Wheel'",
+    "default": true
+  }],
+  "version": "1.1.0"
 }
