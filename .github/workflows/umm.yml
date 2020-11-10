@@ -5,7 +5,7 @@ on:
       - master
     paths:
       - "**/metadata.json"
-      - ".github/workflows/umm.json"
+      - ".github/workflows/umm.yml"
 jobs:
   validate:
     name: Update Multi Metadata
