@@ -34,7 +34,7 @@ jobs:
         with:
           author_name: github-actions
           author_email: github-actions@github.com
-          add: multi_metadata.json
+          add: '*.json'
           message: "🤖 Update metadata [${{ github.sha }}]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
