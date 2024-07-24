@@ -1,0 +1,11 @@
+{
+	"$schema": "https://snazzah.com/steemcord-schema/2.json",
+	"app_id": 2357570,
+	"name": "Overwatch 2",
+	"description": "Overwatch 2 is a critically acclaimed, team-based shooter game set in an optimistic future with an evolving roster of heroes.",
+	"version": "1.0.0",
+	"author": {
+		"name": "WizardCM",
+		"github": "WizardCM"
+	}
+}
