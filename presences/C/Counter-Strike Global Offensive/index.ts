@@ -13,7 +13,7 @@ function checkState(state: string) {
   }
 }
 
-const Maps: { [key: string]: string } = {\
+const Maps: { [key: string]: string } = {
   ar_dizzy: 'Dizzy',
   ar_lunacy: 'Lunacy',
   ar_monastery: 'Monastery',

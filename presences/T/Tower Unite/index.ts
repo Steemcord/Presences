@@ -18,7 +18,7 @@ const Condos: { [key: string]: string } = {
   Theater: 'Theater',
   Resort: 'Resort',
   Playground: 'Item Playground',
-}
+};
 
 const MinigolfMaps: { [key: string]: [string, Array<string>] } = {
   Island: ['Island', [
@@ -221,7 +221,7 @@ const MinigolfMaps: { [key: string]: [string, Array<string>] } = {
     'Plinko',
     'Dragon\'s Tail'
   ]],
-}
+};
 
 const LCMaps: { [key: string]: string } = {
   Knightsend: 'Knightsend-by-sea',
@@ -230,7 +230,7 @@ const LCMaps: { [key: string]: string } = {
   'T. Room': 'Throne Room',
   Market: 'Market',
   Amphitheatre: 'Amphitheatre',
-}
+};
 
 const BallRaceMaps: { [key: string]: string } = {
   Woodlands: 'Woodlands',
@@ -244,7 +244,7 @@ const BallRaceMaps: { [key: string]: string } = {
   Nimbus: 'Nimbus',
   Midori: 'Midori',
   Memories: 'Memories',
-}
+};
 
 const VirusMaps: { [key: string]: string } = {
   Solar: 'Solar',
@@ -252,7 +252,7 @@ const VirusMaps: { [key: string]: string } = {
   Overtime: 'Overtime',
   Hospital: 'Hospital',
   Desertion: 'Desertion',
-}
+};
 
 const ZMMaps: { [key: string]: string } = {
   Compound: 'Compound',
@@ -260,13 +260,13 @@ const ZMMaps: { [key: string]: string } = {
   Nightyard: 'Nightyard',
   Trainyard: 'Trainyard',
   Village: 'Village',
-}
+};
 
 const AccelerateMaps: { [key: string]: string } = {
   'S. Isles': 'Sunrise Isles',
   Bedzoom: 'Bedzoom',
   'P. Valley': 'Pine Valley',
-}
+};
 
 function waitingForRound(data: SteamPresenceData, allowRoundZero = false) {
   const result = data.presence.steam_display === '#Waiting' 
@@ -362,7 +362,7 @@ presence.on('richPresenceUpdate', async data => {
         presenceData.details = `Hole ${data.presence.round}`;
         const hole = parseInt(data.presence.round);
         if (mgholes && mgholes[hole - 1])
-          presenceData.details += `: ${mgholes[hole - 1]}`
+          presenceData.details += `: ${mgholes[hole - 1]}`;
       }
     }
     presence.setActivity(presenceData);
