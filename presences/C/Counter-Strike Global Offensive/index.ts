@@ -54,7 +54,7 @@ const Maps: { [key: string]: string } = {
   dz_junglety: 'Jungle',
   dz_sirocco: 'Sirocco',
   gd_rialto: 'Rialto',
-}
+};
 
 const GameModeNames: { [key: string]: string } = {
   competitive: 'Competitive',
@@ -65,14 +65,14 @@ const GameModeNames: { [key: string]: string } = {
   survival: 'Danger Zone',
   coopmission: 'Co-op Mission',
   cooperative: 'Co-op',
-}
+};
 
 const SkirmishNames: { [key: string]: string } = {
   mg_skirmish_flyingscoutsman: 'Flying Scoutsman',
   mg_skirmish_armsrace: 'Arms Race',
   mg_skirmish_demolition: 'Demolition',
   mg_skirmish_retakes: 'Retakes',
-}
+};
 
 presence.on('richPresenceUpdate', async data => {
   if (!data.presenceString) presence.clearActivity();
@@ -89,7 +89,7 @@ presence.on('richPresenceUpdate', async data => {
     checkState('lobby');
     const mode = GameModeNames[data.presence['game:mode']] || data.presence['game:mode'];
     let groupName = 'map';
-    let groupCount = data.presence['game:mapgroupname'].split(',').length;
+    const groupCount = data.presence['game:mapgroupname'].split(',').length;
     if (data.presence['game:mode'] === 'skirmish')
        groupName = 'map group';
     else if (data.presence['game:mode'] === 'survival' || data.presence['game:mode'] === 'deathmatch' || data.presence['game:mode'] === 'casual')
