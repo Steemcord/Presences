@@ -12,7 +12,8 @@ const GameModeIcons: { [key: string]: string } = {
   'Mystery Heroes': 'quick_play',
   'Deathmatch': 'quick_play',
   'Hero Mastery': 'hero_mastery',
-  'Story Mission': 'story_mission'
+  'Story Mission': 'story_mission',
+  'Stadium': 'stadium'
 };
 
 presence.on('richPresenceUpdate', async steamPresence => {
