@@ -13,7 +13,9 @@ const GameModeIcons: { [key: string]: string } = {
   'Deathmatch': 'quick_play',
   'Hero Mastery': 'hero_mastery',
   'Story Mission': 'story_mission',
-  'Stadium': 'stadium'
+  'Stadium': 'stadium',
+  'Stadium Quick Play': 'stadium',
+  'Stadium Competitive': 'stadium_competitive'
 };
 
 presence.on('richPresenceUpdate', async steamPresence => {
