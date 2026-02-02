@@ -1,0 +1,11 @@
+{
+	"$schema": "https://snazzah.com/steemcord-schema/2.json",
+	"app_id": 2073850,
+	"name": "THE FINALS",
+	"description": "Join THE FINALS, the world-famous, free-to-play, combat-centered game show!",
+	"version": "1.0.0",
+	"author": {
+		"name": "WizardCM",
+		"github": "WizardCM"
+	}
+}
