@@ -13,7 +13,9 @@ const GameModeIcons: { [key: string]: string } = {
   'Deathmatch': 'quick_play',
   'Hero Mastery': 'hero_mastery',
   'Story Mission': 'story_mission',
-  'Stadium': 'stadium'
+  'Stadium': 'stadium',
+  'Stadium Quick Play': 'stadium',
+  'Stadium Competitive': 'stadium_competitive'
 };
 
 presence.on('richPresenceUpdate', async steamPresence => {
@@ -65,6 +67,18 @@ presence.on('richPresenceUpdate', async steamPresence => {
   if (details.length) {
     presenceData.largeImageText = details;
     presenceData.details = details;
+  }
+  const groupSize = Number(steamPresence?.presence?.steam_player_group_size || 1);
+  const groupId = steamPresence?.presence?.steam_player_group;
+  const defaultGroupMax = 5;
+  if (groupId) {
+    presenceData.partyId = groupId;
+    presenceData.partySize = groupSize;
+    presenceData.partyMax = groupSize > defaultGroupMax ? groupSize : 5;
+    if (!details) {
+      presenceData.state = 'In Group';
+      presenceData.details = state;
+    }
   }
   if (!['In Menu', 'Match Ending'].includes(state)) {
     presenceData.startTimestamp = Date.now();
